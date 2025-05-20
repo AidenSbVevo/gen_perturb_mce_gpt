@@ -22,6 +22,18 @@ python scrape_mce_by_genes.py \
   --output-path mce_drugs.csv
 ```
 
+`--driver-path` (str, required)
+Path to your ChromeDriver executable (must match your Chrome version).
+
+`--gene-list` (str, required)
+Input TSV/CSV file containing a column named Gene.
+
+`--column` (str, required, default: gene)
+Name of the column in the input CSV that contains gene names.
+
+`--output-path` (str, required)
+Path to the output CSV where scraped counts will be saved.
+
 ### 2. Filter for cancer-related drugs
 
 Filters the above results to only include those studied or developed in a cancer context using the MCE “Cancer” filter.
