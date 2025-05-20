@@ -28,9 +28,6 @@ Path to your ChromeDriver executable (must match your Chrome version).
 `--gene-list` (str, required)
 Input TSV/CSV file containing a column named Gene.
 
-`--column` (str, required, default: gene)
-Name of the column in the input CSV that contains gene names.
-
 `--output-path` (str, required)
 Path to the output CSV where scraped counts will be saved.
 
@@ -46,6 +43,15 @@ python scrape_mce_by_genes_cancerdrugs_only.py \
   --output-path mce_cancer_only_drugs.csv
 ```
 
+`--driver-path` (str, required)
+Path to your ChromeDriver executable (must match your Chrome version).
+
+`--gene-list` (str, required)
+Input TSV/CSV file containing a column named Gene.
+
+`--output-path` (str, required)
+Path to the output CSV where “Cancer”-filtered counts will be saved.
+
 ### 3. Score gene relevance to cancer using GPT-4
 
 Leverages OpenAI’s GPT-4 to score genes on a scale from 1 to 3 for their cancer relevance and provide short justifications.
@@ -59,10 +65,22 @@ python gpt_get_gene_cancer_info.py \
   --batch-size 15
 ```
 
-`--batch-size` defines the number of genes sent in each GPT request (recommended: 15–20).
+`--input-path` (str, required)
+Path to the input CSV file containing gene names.
+
+`--output-path` (str, required)
+Path to the output text file (comma-separated) where results will be written.
+
+`--column` (str, optional, default: gene)
+Name of the column in the input CSV that contains gene names.
+
+`--batch-size` (int, optional, default: 15)
+Number of genes to send per API request (recommended: 15–20).
 
 Make sure to set your OpenAI API key via environment variable:
 
 ```bash
 export OPENAI_API_KEY=your-api-key-here
 ```
+
+After everything is done we can merge all the outputs and add Ensemble Ids.
